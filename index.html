@@ -1,0 +1,1112 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>Unix and Bash Scripting Course</title>
+
+    <link rel="stylesheet" href="dist/reset.css">
+    <link rel="stylesheet" href="dist/reveal.css">
+    <link rel="stylesheet" href="dist/theme/black.css">
+
+    <!-- Theme used for syntax highlighted code -->
+    <link rel="stylesheet" href="plugin/highlight/monokai.css">
+
+    <!-- Custom Styles -->
+    <style>
+        /* Custom styles for your presentation */
+        .reveal h1 {
+            font-size: 2.5em;
+            color: #ff5722;
+        }
+
+        .reveal h2 {
+            font-size: 1.8em;
+            color: #ff5722;
+        }
+
+        .reveal p {
+            font-size: 1.2em;
+            color: #f0f0f0;
+        }
+
+        .reveal ul {
+            font-size: 1.2em;
+            color: #f0f0f0;
+        }
+
+        /* Customize the background color */
+        .reveal {
+            background-color: #1a1a1a;
+        }
+
+        /* Customize code blocks */
+        .reveal pre {
+            width: 90%;
+            margin: 20px auto;
+        }
+
+        .reveal pre code {
+            padding: 15px;
+        }
+
+        /* Logo styling */
+        .logo {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            width: 80px;
+            height: 80px;
+            z-index: 1000;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="logo">
+        <svg height="35px" version="1.0" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 610.000000 468.000000"
+            preserveAspectRatio="xMidYMid meet">
+            <metadata>Created by potrace 1.16, written by Peter Selinger 2001-2019</metadata>
+            <g transform="translate(0.000000,468.000000) scale(0.100000,-0.100000)" fill="#9e0e17" stroke="none">
+                <path d="M1556 4548 c-32 -73 -75 -171 -96 -218 -32 -72 -107 -245 -192 -440
+            -50 -115 -79 -182 -116 -265 -22 -49 -57 -128 -77 -175 -20 -47 -43 -99 -51
+            -117 -19 -42 -118 -268 -159 -363 -18 -41 -37 -86 -43 -100 -6 -14 -54 -124
+            -107 -245 -53 -121 -112 -256 -131 -300 -20 -44 -46 -105 -59 -135 -13 -30
+            -42 -95 -63 -145 -46 -103 -65 -146 -116 -265 -20 -47 -50 -114 -66 -150 -34
+            -78 -90 -205 -155 -355 -26 -60 -65 -148 -86 -194 -46 -98 -47 -120 -15 -192
+            13 -30 56 -130 95 -224 39 -93 82 -195 96 -225 29 -66 76 -175 140 -327 33
+            -78 53 -113 64 -113 9 0 34 11 56 23 118 68 524 303 550 317 17 10 57 33 90
+            52 54 32 150 87 237 137 18 10 62 36 98 56 36 21 110 64 165 95 55 31 127 73
+            160 92 319 185 431 249 557 320 81 46 148 88 148 94 0 5 -11 34 -25 62 -14 29
+            -25 56 -25 60 0 5 -12 33 -26 63 -15 30 -32 70 -40 89 -7 19 -29 73 -49 120
+            -20 47 -55 129 -78 183 -22 53 -46 97 -52 97 -6 0 -31 -13 -56 -28 -24 -15
+            -71 -43 -104 -61 -67 -38 -90 -51 -185 -106 -36 -21 -110 -64 -165 -95 -55
+            -31 -127 -73 -160 -92 -81 -47 -389 -225 -444 -256 -25 -13 -70 -40 -100 -58
+            -31 -18 -57 -31 -58 -30 -3 3 34 101 63 164 13 29 24 55 24 58 0 3 9 24 19 47
+            11 24 40 92 66 152 25 61 57 135 70 165 13 30 44 102 68 160 120 287 193 457
+            242 570 14 30 44 102 68 160 114 271 181 431 242 570 43 98 91 212 150 353 31
+            75 60 137 64 137 4 0 19 -30 35 -67 16 -38 43 -102 61 -143 18 -41 63 -147
+            100 -235 37 -88 78 -184 91 -213 13 -29 24 -55 24 -58 0 -3 9 -24 19 -47 11
+            -24 40 -92 66 -152 25 -61 57 -135 70 -165 13 -30 44 -102 68 -160 120 -287
+            193 -457 242 -570 14 -30 44 -102 68 -160 119 -283 190 -452 242 -570 13 -30
+            58 -136 100 -235 81 -193 95 -226 148 -350 19 -44 53 -125 77 -180 23 -55 51
+            -119 61 -142 11 -23 19 -44 19 -47 0 -3 13 -34 29 -68 15 -35 31 -73 35 -85
+            l7 -23 1275 0 1274 0 0 365 0 365 -995 0 c-730 0 -995 3 -995 11 0 6 -15 46
+            -34 88 -89 200 -199 452 -252 574 -70 163 -83 193 -118 270 -20 43 -36 80 -36
+            82 0 2 -11 28 -24 57 -13 29 -41 91 -61 138 -20 47 -49 114 -65 150 -50 114
+            -106 241 -160 365 -28 66 -68 156 -87 200 -78 177 -103 233 -133 305 -18 41
+            -40 93 -50 115 -20 45 -73 165 -132 300 -21 50 -50 115 -63 145 -13 30 -42 96
+            -63 145 -35 78 -84 192 -177 405 -13 30 -44 100 -68 155 -24 55 -58 134 -76
+            175 -18 41 -52 118 -75 170 l-42 95 -390 3 -391 2 -57 -132z"></path>
+                <path d="M2970 4670 c0 -6 14 -41 31 -78 17 -37 51 -114 76 -172 25 -58 53
+            -123 63 -145 9 -22 34 -78 54 -125 20 -47 49 -111 63 -142 l27 -58 1408 0
+            1408 0 0 365 0 365 -1565 0 c-1059 0 -1565 -3 -1565 -10z"></path>
+                <path d="M3835 2688 c6 -21 37 -92 115 -268 16 -36 46 -103 66 -150 57 -132
+            60 -140 98 -222 l35 -78 975 0 976 0 0 370 0 370 -1136 0 -1135 0 6 -22z"></path>
+            </g>
+        </svg>
+    </div>
+    <div class="reveal">
+        <div class="slides">
+            <!-- Slide 1: Introduction -->
+            <section>
+                <h1 style="color: #ff5722;">Unix and Bash Scripting</h1>
+                <p style="color: #f0f0f0;">Learn the fundamentals of Unix and Bash scripting with practical examples
+                </p>
+                <div style="position: absolute; bottom: -150px; right: 20px; color: #f0f0f0; font-size: 0.8em;">
+                    Amr Elsekilly
+                </div>
+
+                <aside class="notes">
+                    Start with a brief history of Unix and its importance in modern computing.
+                </aside>
+            </section>
+
+            <!-- Slide 2: What is Unix? -->
+            <section>
+                <h2 style="font-size: 2em;">Episode 1: What is Unix?</h2>
+                <p style="font-size: 1.2em;">Unix is a powerful, multiuser, multitasking operating system originally
+                    developed in the 1970s.</p>
+                <svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="122" height="50" id="svg2">
+                    <g style="font-family:ArialMT;fill:#1d6434" aria-label="UNIX" id="g12">
+                        <path
+                            d="m 24.34375,0.20898437 h 4.736328 V 20.887695 q 0,5.395508 -1.220703,8.569336 -1.220703,3.173828 -4.418945,5.175782 -3.173828,1.977539 -8.34961,1.977539 -5.029297,0 -8.2275387,-1.733399 Q 3.6650391,33.143555 2.2978516,29.87207 0.93066406,26.576172 0.93066406,20.887695 V 0.20898437 H 5.6669922 V 20.863281 q 0,4.663086 0.8544922,6.884766 0.8789062,2.197266 2.9785156,3.393555 2.124023,1.196289 5.175781,1.196289 5.22461,0 7.446289,-2.368164 2.22168,-2.368164 2.22168,-9.106446 z" />
+                        <path
+                            d="M 36.916992,36 V 0.20898437 h 4.858399 L 60.574219,28.30957 V 0.20898437 h 4.541015 V 36 H 60.256836 L 41.458008,7.875 V 36 Z" />
+                        <path d="M 73.879883,36 V 0.20898437 h 4.736328 V 36 Z" />
+                        <path
+                            d="M 83.328125,36 97.170898,17.347656 84.963867,0.20898437 h 5.639649 l 6.49414,9.17968753 q 2.026367,2.8564451 2.88086,4.3945311 1.196284,-1.953125 2.832034,-4.0771483 l 7.20215,-9.49707033 h 5.15136 L 102.59082,17.079102 116.14062,36 h -5.85937 l -9.00879,-12.768555 q -0.75684,-1.098632 -1.562499,-2.392578 -1.196289,1.953125 -1.708984,2.685547 L 89.016602,36 Z" />
+                    </g>
+                </svg>
+                <aside class="notes">
+                    Start with a brief history of Unix and its importance in modern computing.
+                </aside>
+            </section>
+
+            <!-- New Slide: History of Unix -->
+            <section>
+                <h2 style="color: #ff5722; font-size: 2em;">History of Unix</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">
+                    Unix was developed in 1969 at AT&T's Bell Labs by Ken Thompson, Dennis Ritchie, and others.
+                    It was initially created as a simple, multi-tasking system for programmers.
+                </p>
+            </section>
+
+            <!-- Slide: Evolution of Unix -->
+            <section>
+                <h2 style="color: #ff5722; font-size: 2em;">Evolution of Unix</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">
+                    Over the years, Unix evolved into a powerful operating system that became the foundation for many
+                    others, including Linux and macOS.
+                </p>
+            </section>
+
+            <!-- Slide: Key Milestones in Unix History -->
+            <section>
+                <h2 style="color: #ff5722; font-size: 2em;">Key Milestones in Unix History</h2>
+                <ul style="color: #f0f0f0; font-size: 1.2em;">
+                    <li>1971: First version of Unix released.</li>
+                    <li>1973: Unix rewritten in the C programming language, enhancing portability.</li>
+                    <li>1980s: Various Unix versions developed, including BSD and System V.</li>
+                    <li>1991: Linux, a Unix-like operating system, is released by Linus Torvalds.</li>
+                    <li>2000s: Unix systems become widely used in servers and enterprise environments.</li>
+                </ul>
+                <aside class="notes">
+                    Discuss the evolution of Unix and its impact on modern operating systems.
+                </aside>
+            </section>
+
+            <!-- Slide: Unix Architecture -->
+            <section>
+                <h2>Unix Architecture</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">
+                    Unix architecture consists of several components, including the kernel, shell, and file system.
+                </p>
+                <img src="https://www.tutorialspoint.com/unix/images/unix_architecture.jpg"
+                    alt="Unix Architecture Diagram" />
+                <aside class="notes">
+                    Explain the components of Unix architecture: kernel, shell, and file system.
+                </aside>
+            </section>
+
+            <!-- Main Unix Filesystem Structure Slide -->
+            <section>
+                <h2>Unix Filesystem Structure</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">
+                    The Unix filesystem is organized in a hierarchical structure, starting from the root (/) directory.
+                </p>
+                <img src="assets/filesystem-tree.png" alt="Unix Filesystem Tree" />
+                <aside class="notes">
+                    Introduce the concept of the Unix filesystem hierarchy.
+                </aside>
+            </section>
+
+            <!-- Root Directory Structure -->
+            <section>
+                <h2>Root Directory (/)</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">
+                    The root directory (/) is the top-level directory in Unix systems.
+                </p>
+                <ul style="color: #f0f0f0; font-size: 1.2em;" class="fragment">
+                    <li>All other directories branch from the root</li>
+                    <li>Absolute paths always start from root (/)</li>
+                    <li>Contains essential system directories</li>
+                </ul>
+            </section>
+
+            <!-- Applications and Library -->
+            <section>
+                <h2>Applications and Library</h2>
+                <ul style="color: #f0f0f0; font-size: 1.2em;">
+                    <li class="fragment">/Applications - Contains user applications</li>
+                    <li class="fragment">/Library - System-wide libraries and support files</li>
+                </ul>
+                <pre class="fragment"><code class="bash"># Common paths
+/Applications/    # User applications
+/Library/         # System libraries
+/Library/Frameworks/  # System frameworks</code></pre>
+            </section>
+
+            <!-- System Directory -->
+            <section>
+                <h2>System Directory</h2>
+                <ul style="color: #f0f0f0; font-size: 1.2em;">
+                    <li class="fragment">/System - Core system components</li>
+                    <li class="fragment">Contains essential OS files</li>
+                    <li class="fragment">Rarely modified directly</li>
+                </ul>
+                <pre class="fragment"><code class="bash"># System directory structure
+/System/
+├── Library/
+└── Volumes/</code></pre>
+            </section>
+
+            <!-- Users and Volumes -->
+            <section>
+                <h2>Users and Volumes</h2>
+                <ul style="color: #f0f0f0; font-size: 1.2em;">
+                    <li class="fragment">/Users - Home directories for all users</li>
+                    <li class="fragment">/Volumes - Mount point for other filesystems</li>
+                </ul>
+                <pre class="fragment"><code class="bash"># Directory structure
+/Users/
+├── username/
+│   ├── Documents/
+│   └── Desktop/
+/Volumes/
+├── ExternalDrive/
+└── NetworkShare/</code></pre>
+            </section>
+
+            <!-- Core System Binaries -->
+            <section>
+                <h2>Core System Binaries</h2>
+                <ul style="color: #f0f0f0; font-size: 1.2em;">
+                    <li class="fragment">/bin - Essential command binaries</li>
+                    <li class="fragment">/sbin - System binaries</li>
+                    <li class="fragment">/cores - Core dumps</li>
+                </ul>
+                <pre class="fragment"><code class="bash"># Essential commands location
+/bin/ls    # List directory contents
+/bin/cp    # Copy files
+/bin/mv    # Move files
+/sbin/mount # Mount filesystems</code></pre>
+            </section>
+
+            <!-- System Configuration -->
+            <section>
+                <h2>System Configuration</h2>
+                <ul style="color: #f0f0f0; font-size: 1.2em;">
+                    <li class="fragment">/etc - System configuration files</li>
+                    <li class="fragment">/private/etc - Actual location of system configs</li>
+                    <li class="fragment">/dev - Device files</li>
+                </ul>
+                <pre class="fragment"><code class="bash"># Important configuration files
+/etc/
+├── passwd     # User accounts
+├── hosts      # Host name resolution
+└── ssh/       # SSH configuration</code></pre>
+            </section>
+
+            <!-- Variable Data -->
+            <section>
+                <h2>Variable Data</h2>
+                <ul style="color: #f0f0f0; font-size: 1.2em;">
+                    <li class="fragment">/var - Variable data files</li>
+                    <li class="fragment">/tmp - Temporary files</li>
+                    <li class="fragment">/private/var - Actual variable data location</li>
+                </ul>
+                <pre class="fragment"><code class="bash"># Common variable data
+/var/
+├── log/       # System logs
+├── mail/      # Mail data
+└── spool/     # Print queues</code></pre>
+            </section>
+
+            <!-- File Types in Unix -->
+            <section>
+                <h2>File Types in Unix</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">
+                    Unix supports various file types, including regular files, directories, symbolic links, and special
+                    files.
+                </p>
+                <pre><code class="bash"># Regular files
+-rw-r--r-- 1 user group file.txt
+
+# Directories
+drwxr-xr-x 2 user group Documents
+
+# Symbolic links
+lrwxrwxrwx 1 user group link -> target
+
+# Special files
+crw-rw-rw- 1 root root /dev/null
+brw-rw---- 1 root disk /dev/sda</code></pre>
+                <aside class="notes">
+                    Explain different file types and their characteristics.
+                </aside>
+            </section>
+
+            <!-- Essential Unix Commands -->
+            <section>
+                <h2>Essential Unix Commands</h2>
+                <pre><code class="bash"># File Operations
+ls -la         # List all files with details
+cp -r src dst  # Copy recursively
+mv old new     # Move/rename files
+rm -rf dir     # Remove recursively
+
+# Navigation
+pwd            # Print working directory
+cd -           # Go to previous directory
+pushd /path    # Push directory to stack
+popd           # Pop directory from stack</code></pre>
+                <aside class="notes">
+                    Cover fundamental commands for daily use.
+                </aside>
+            </section>
+
+            <!-- File Content Commands -->
+            <section>
+                <h2>Working with File Contents</h2>
+                <pre><code class="bash"># Viewing files
+cat file.txt   # Display entire file
+less file.txt  # Page through file
+head -n 5      # Show first 5 lines
+tail -f log    # Follow file updates
+
+# Searching content
+grep pattern file    # Search for pattern
+find . -name "*.txt" # Find files by name
+locate filename      # Quick file search</code></pre>
+                <aside class="notes">
+                    Demonstrate commands for viewing and searching file contents.
+                </aside>
+            </section>
+
+            <!-- Text Processing Basics -->
+            <section>
+                <h2>Text Processing Basics</h2>
+                <pre><code class="bash"># Basic text manipulation
+cut -d',' -f1 file.csv   # Extract first column
+sort -n numbers.txt      # Sort numerically
+uniq -c                  # Count unique lines
+wc -l file.txt          # Count lines
+
+# Text streams
+echo "hello" | tr a-z A-Z  # Convert to uppercase
+cat file.txt | grep error | sort | uniq</code></pre>
+                <aside class="notes">
+                    Explain basic text processing and pipelines.
+                </aside>
+            </section>
+
+            <!-- Bash Script Structure -->
+            <section>
+                <h2>Bash Script Structure</h2>
+                <pre><code class="bash">#!/bin/bash
+# Script description
+# Author: Your Name</code></pre>
+                <aside class="notes">
+                    Explain the basic structure of a Bash script.
+                </aside>
+            </section>
+
+            <!-- Variables and Data Types -->
+            <section>
+                <h2>Variables and Data Types</h2>
+                <pre><code class="bash"># String variables
+name="John"
+greeting="Hello, $name!"
+
+# Numeric operations
+count=5
+((count++))
+result=$((5 + 3))
+
+# Arrays
+fruits=("apple" "banana" "orange")
+echo "${fruits[0]}"      # First element
+echo "${fruits[@]}"      # All elements
+echo "${/#fruits[@]}"     # Array length</code>
+</pre>
+                <aside class="notes">
+                    Cover variable types and operations in Bash.
+                </aside>
+            </section>
+
+            <!-- Control Flow Fundamentals -->
+            <section>
+                <h2>Control Flow Fundamentals</h2>
+                <pre><code class="bash"># If statements with file tests
+if [ -f "$file" ]; then
+    echo "File exists"
+elif [ -d "$file" ]; then
+    echo "It's a directory"
+else
+    echo "Not found"
+fi
+
+# Case statements
+case "$option" in
+    start)
+        start_service
+        ;;
+    stop)
+        stop_service
+        ;;
+    *)
+        echo "Invalid option"
+        ;;
+esac</code></pre>
+                <aside class="notes">
+                    Explain control flow structures and file test operators.
+                </aside>
+            </section>
+
+            <!-- Loop Structures in Bash -->
+            <section>
+                <h2>Loop Structures in Bash</h2>
+                <pre><code class="bash"># For loops
+for file in *.txt; do
+    echo "Processing $file"
+done
+
+# While loops with read
+while IFS= read -r line; do
+    echo "Line: $line"
+done < input.txt
+
+# Until loops
+count=0
+until [ $count -ge 5 ]; do
+    echo $count
+    ((count++))
+done</code></pre>
+                <aside class="notes">
+                    Cover different types of loops and their use cases.
+                </aside>
+            </section>
+
+            <!-- The ls Command -->
+            <section>
+                <h2>The ls Command</h2>
+                <pre><code class="bash"># List files and directories
+ls              # Basic listing
+ls -l           # Detailed listing
+ls -a           # Show hidden files
+ls -lh          # Human-readable sizes
+ls -R           # Recursive listing</code></pre>
+                <aside class="notes">
+                    Explain each option and its use case in detail.
+                </aside>
+            </section>
+
+            <!-- Exercise: ls Command -->
+            <section>
+                <h2>Exercise: ls Command</h2>
+                <p>Complete these tasks:</p>
+                <ol>
+                    <li class="fragment">List all files, including hidden ones, in your home directory</li>
+                    <li class="fragment">Show files with their sizes in human-readable format</li>
+                    <li class="fragment">List files sorted by modification time</li>
+                    <li class="fragment">Show only directories</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">ls -la ~
+ls -lh
+ls -lt
+ls -d */</code></pre>
+                </div>
+            </section>
+
+            <!-- The cd Command -->
+            <section>
+                <h2>The cd Command</h2>
+                <pre><code class="bash"># Change directory
+cd /path/to/dir    # Go to specific directory
+cd                 # Go to home directory
+cd ..              # Go up one level
+cd -               # Go to previous directory
+cd ~/Documents     # Go to Documents in home</code></pre>
+                <aside class="notes">
+                    Explain directory navigation and path concepts.
+                </aside>
+            </section>
+
+            <!-- Exercise: cd Command -->
+            <section>
+                <h2>Exercise: cd Command</h2>
+                <p>Navigate through the filesystem:</p>
+                <ol>
+                    <li class="fragment">Go to your home directory</li>
+                    <li class="fragment">Navigate to /etc and then back to previous location</li>
+                    <li class="fragment">Go up two directory levels using relative paths</li>
+                    <li class="fragment">Navigate to a deeply nested directory using absolute path</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">cd ~
+cd /etc && cd -
+cd ../..
+cd /var/log/apache2</code></pre>
+                </div>
+            </section>
+
+            <!-- The pwd Command -->
+            <section>
+                <h2>The pwd Command</h2>
+                <pre><code class="bash"># Print Working Directory
+pwd                # Show current directory
+pwd -P             # Show physical path (resolve symlinks)
+pwd -L             # Show logical path</code></pre>
+                <aside class="notes">
+                    Explain the importance of knowing your current location.
+                </aside>
+            </section>
+
+            <!-- Exercise: pwd Command -->
+            <section>
+                <h2>Exercise: pwd Command</h2>
+                <p>Working with pwd:</p>
+                <ol>
+                    <li class="fragment">Create a symbolic link and navigate to it</li>
+                    <li class="fragment">Show both logical and physical paths</li>
+                    <li class="fragment">Use pwd in a script to verify location</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">ln -s /var/log logs
+cd logs
+pwd -P
+pwd -L</code></pre>
+                </div>
+            </section>
+
+            <!-- The mkdir Command -->
+            <section>
+                <h2>The mkdir Command</h2>
+                <pre><code class="bash"># Make Directory
+mkdir docs                  # Create single directory
+mkdir -p a/b/c             # Create parent directories
+mkdir -m 755 secure_dir    # Create with specific permissions
+mkdir dir1 dir2 dir3       # Create multiple directories</code></pre>
+                <aside class="notes">
+                    Explain directory creation and permission setting.
+                </aside>
+            </section>
+
+            <!-- Exercise: mkdir Command -->
+            <section>
+                <h2>Exercise: mkdir Command</h2>
+                <p>Directory Creation Tasks:</p>
+                <ol>
+                    <li class="fragment">Create a directory structure for a web project</li>
+                    <li class="fragment">Create multiple directories with specific permissions</li>
+                    <li class="fragment">Create nested directories in one command</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">mkdir -p project/{src,dist,docs}
+mkdir -m 700 secure_data
+mkdir -p ~/projects/web/{css,js,images}</code></pre>
+                </div>
+            </section>
+
+            <!-- The cp Command -->
+            <section>
+                <h2>The cp Command</h2>
+                <pre><code class="bash"># Copy files and directories
+cp file1 file2             # Copy file
+cp -r dir1 dir2           # Copy directory recursively
+cp -p file1 file2         # Preserve permissions
+cp -i file1 file2         # Interactive mode</code></pre>
+                <aside class="notes">
+                    Explain file copying and its various options.
+                </aside>
+            </section>
+
+            <!-- Exercise: cp Command -->
+            <section>
+                <h2>Exercise: cp Command</h2>
+                <p>Copy Operations:</p>
+                <ol>
+                    <li class="fragment">Copy multiple files to a directory</li>
+                    <li class="fragment">Copy a directory structure preserving attributes</li>
+                    <li class="fragment">Create a backup copy with timestamp</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">cp *.txt backup/
+cp -rp project/ project_backup/
+cp file.txt file.txt.$(date +%Y%m%d)</code></pre>
+                </div>
+            </section>
+
+            <!-- The mv Command -->
+            <section>
+                <h2>The mv Command</h2>
+                <pre><code class="bash"># Move or rename files
+mv file1 file2             # Rename file
+mv file dir/               # Move file to directory
+mv -i file1 file2         # Interactive mode
+mv -n file1 file2         # No overwrite</code></pre>
+                <aside class="notes">
+                    Explain moving and renaming operations.
+                </aside>
+            </section>
+
+            <!-- Exercise: mv Command -->
+            <section>
+                <h2>Exercise: mv Command</h2>
+                <p>Move and Rename Tasks:</p>
+                <ol>
+                    <li class="fragment">Organize files by extension into directories</li>
+                    <li class="fragment">Rename files with a pattern</li>
+                    <li class="fragment">Move files safely without overwriting</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">for ext in jpg png pdf; do
+    mv *.$ext ${ext}_files/
+done
+mv project{,-old}
+mv -n *.log backup/</code></pre>
+                </div>
+            </section>
+
+            <!-- The rm Command -->
+            <section>
+                <h2>The rm Command</h2>
+                <pre><code class="bash"># Remove files and directories
+rm file                    # Remove file
+rm -r directory           # Remove directory recursively
+rm -f file                # Force remove
+rm -i file                # Interactive mode</code></pre>
+                <aside class="notes">
+                    Explain file removal and safety considerations.
+                </aside>
+            </section>
+
+            <!-- Exercise: rm Command -->
+            <section>
+                <h2>Exercise: rm Command</h2>
+                <p>Removal Operations:</p>
+                <ol>
+                    <li class="fragment">Remove files matching a pattern</li>
+                    <li class="fragment">Clean up empty directories</li>
+                    <li class="fragment">Safely remove files with confirmation</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">rm *.tmp
+find . -type d -empty -delete
+rm -i *.log</code></pre>
+                </div>
+            </section>
+
+            <!-- The touch Command -->
+            <section>
+                <h2>The touch Command</h2>
+                <pre><code class="bash"># Create an empty file or update timestamp
+touch file.txt              # Create a new file
+touch existing_file.txt      # Update timestamp of existing file
+touch -d "2023-01-01" file.txt  # Set specific timestamp</code></pre>
+                <aside class="notes">
+                    Explain the use of touch for file creation and timestamp management.
+                </aside>
+            </section>
+
+            <!-- touch Exercise -->
+            <section>
+                <h2>Exercise: touch Command</h2>
+                <p>File Creation Tasks:</p>
+                <ol>
+                    <li class="fragment">Create multiple empty files at once</li>
+                    <li class="fragment">Update the timestamp of a file</li>
+                    <li class="fragment">Set a specific timestamp for a file</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">touch file1.txt file2.txt file3.txt
+touch -d "2023-01-01" file1.txt</code></pre>
+                </div>
+            </section>
+
+            <!-- The cat Command -->
+            <section>
+                <h2>The cat Command</h2>
+                <pre><code class="bash"># Concatenate and display files
+cat file.txt               # Display file content
+cat file1.txt file2.txt    # Concatenate files
+cat > newfile.txt          # Create a new file from stdin</code></pre>
+                <aside class="notes">
+                    Explain how to use cat for file display and concatenation.
+                </aside>
+            </section>
+
+            <!-- cat Exercise -->
+            <section>
+                <h2>Exercise: cat Command</h2>
+                <p>File Display Tasks:</p>
+                <ol>
+                    <li class="fragment">Display the contents of a file</li>
+                    <li class="fragment">Concatenate two files into a new file</li>
+                    <li class="fragment">Create a new file using cat</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">cat myfile.txt
+cat file1.txt file2.txt > combined.txt
+cat > newfile.txt</code></pre>
+                </div>
+            </section>
+
+            <!-- The less Command -->
+            <section>
+                <h2>The less Command</h2>
+                <pre><code class="bash"># View file contents page by page
+less file.txt              # View file
+less +G file.txt           # Start at the end of the file
+less -N file.txt           # Show line numbers</code></pre>
+                <aside class="notes">
+                    Explain how to navigate through files using less.
+                </aside>
+            </section>
+
+            <!-- less Exercise -->
+            <section>
+                <h2>Exercise: less Command</h2>
+                <p>File Navigation Tasks:</p>
+                <ol>
+                    <li class="fragment">Open a large log file and search for a specific term</li>
+                    <li class="fragment">Navigate to the end of the file</li>
+                    <li class="fragment">Display line numbers while viewing</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">less /var/log/syslog
+less +G /var/log/syslog
+less -N /var/log/syslog</code></pre>
+                </div>
+            </section>
+
+            <!-- The head Command -->
+            <section>
+                <h2>The head Command</h2>
+                <pre><code class="bash"># Display the first lines of a file
+head file.txt              # First 10 lines
+head -n 5 file.txt         # First 5 lines
+head -c 20 file.txt        # First 20 bytes</code></pre>
+                <aside class="notes">
+                    Explain how to use head for quick file previews.
+                </aside>
+            </section>
+
+            <!-- head Exercise -->
+            <section>
+                <h2>Exercise: head Command</h2>
+                <p>File Preview Tasks:</p>
+                <ol>
+                    <li class="fragment">Display the first 15 lines of a file</li>
+                    <li class="fragment">Show the first 100 bytes of a file</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">head -n 15 myfile.txt
+head -c 100 myfile.txt</code></pre>
+                </div>
+            </section>
+
+            <!-- The tail Command -->
+            <section>
+                <h2>The tail Command</h2>
+                <pre><code class="bash"># Display the last lines of a file
+tail file.txt              # Last 10 lines
+tail -n 5 file.txt         # Last 5 lines
+tail -f log.txt            # Follow log file updates</code></pre>
+                <aside class="notes">
+                    Explain how to monitor files in real-time using tail.
+                </aside>
+            </section>
+
+            <!-- tail Exercise -->
+            <section>
+                <h2>Exercise: tail Command</h2>
+                <p>File Monitoring Tasks:</p>
+                <ol>
+                    <li class="fragment">Display the last 20 lines of a file</li>
+                    <li class="fragment">Monitor a log file for new entries</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">tail -n 20 myfile.txt
+tail -f /var/log/syslog</code></pre>
+                </div>
+            </section>
+
+            <!-- The grep Command -->
+            <section>
+                <h2>The grep Command</h2>
+                <pre><code class="bash"># Search for patterns in files
+grep "error" file.txt      # Search for 'error'
+grep -i "error" file.txt   # Case-insensitive search
+grep -r "pattern" /path    # Recursive search in directory</code></pre>
+                <aside class="notes">
+                    Explain how to use grep for searching text.
+                </aside>
+            </section>
+
+            <!-- grep Exercise -->
+            <section>
+                <h2>Exercise: grep Command</h2>
+                <p>Search Tasks:</p>
+                <ol>
+                    <li class="fragment">Find all occurrences of a word in a file</li>
+                    <li class="fragment">Search for a pattern in all text files in a directory</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">grep "word" myfile.txt
+grep -r "pattern" /path/to/directory/*.txt</code></pre>
+                </div>
+            </section>
+
+            <!-- The find Command -->
+            <section>
+                <h2>The find Command</h2>
+                <pre><code class="bash"># Search for files in a directory hierarchy
+find /path -name "*.txt"          # Find by name
+find /path -type f -size +1M      # Find files larger than 1MB
+find /path -mtime -7               # Find files modified in the last 7 days</code></pre>
+                <aside class="notes">
+                    Explain how to use find for file searching.
+                </aside>
+            </section>
+
+            <!-- find Exercise -->
+            <section>
+                <h2>Exercise: find Command</h2>
+                <p>File Searching Tasks:</p>
+                <ol>
+                    <li class="fragment">Find all .log files in a directory</li>
+                    <li class="fragment">Find files modified in the last 24 hours</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">find /var/log -name "*.log"
+find /path -mtime -1</code></pre>
+                </div>
+            </section>
+
+            <!-- The chmod Command -->
+            <section>
+                <h2>The chmod Command</h2>
+                <pre><code class="bash"># Change file permissions
+chmod 755 file.txt          # Set rwxr-xr-x
+chmod u+x script.sh         # Add execute permission for user
+chmod -R 700 /path/to/dir   # Recursively set permissions</code></pre>
+                <aside class="notes">
+                    Explain file permission settings and their significance.
+                </aside>
+            </section>
+
+            <!-- chmod Exercise -->
+            <section>
+                <h2>Exercise: chmod Command</h2>
+                <p>Permission Tasks:</p>
+                <ol>
+                    <li class="fragment">Change permissions of a file to read-only for others</li>
+                    <li class="fragment">Set executable permissions for a script</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">chmod 444 myfile.txt
+chmod +x myscript.sh</code></pre>
+                </div>
+            </section>
+
+            <!-- The chown Command -->
+            <section>
+                <h2>The chown Command</h2>
+                <pre><code class="bash"># Change file owner and group
+chown user:group file.txt          # Change owner and group
+chown -R user:group /path/to/dir   # Recursively change ownership</code></pre>
+                <aside class="notes">
+                    Explain ownership and group management.
+                </aside>
+            </section>
+
+            <!-- chown Exercise -->
+            <section>
+                <h2>Exercise: chown Command</h2>
+                <p>Ownership Tasks:</p>
+                <ol>
+                    <li class="fragment">Change ownership of a file to a specific user</li>
+                    <li class="fragment">Recursively change ownership of a directory</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">chown newuser file.txt
+chown -R newuser:newgroup /path/to/dir</code></pre>
+                </div>
+            </section>
+
+            <!-- The tar Command -->
+            <section>
+                <h2>The tar Command</h2>
+                <pre><code class="bash"># Archive files
+tar -cvf archive.tar /path/to/dir      # Create an archive
+tar -xvf archive.tar                   # Extract an archive
+tar -czvf archive.tar.gz /path/to/dir  # Create a compressed archive</code></pre>
+                <aside class="notes">
+                    Explain archiving and compression techniques.
+                </aside>
+            </section>
+
+            <!-- tar Exercise -->
+            <section>
+                <h2>Exercise: tar Command</h2>
+                <p>Archiving Tasks:</p>
+                <ol>
+                    <li class="fragment">Create a tar archive of a directory</li>
+                    <li class="fragment">Extract files from a tar archive</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">tar -cvf myarchive.tar /path/to/dir
+tar -xvf myarchive.tar</code></pre>
+                </div>
+            </section>
+
+            <!-- The gzip Command -->
+            <section>
+                <h2>The gzip Command</h2>
+                <pre><code class="bash"># Compress files
+gzip file.txt              # Compress file
+gunzip file.txt.gz         # Decompress file
+gzip -k file.txt           # Keep original file</code></pre>
+                <aside class="notes">
+                    Explain file compression and decompression.
+                </aside>
+            </section>
+
+            <!-- gzip Exercise -->
+            <section>
+                <h2>Exercise: gzip Command</h2>
+                <p>Compression Tasks:</p>
+                <ol>
+                    <li class="fragment">Compress multiple files at once</li>
+                    <li class="fragment">Decompress a gzipped file</li>
+                </ol>
+                <div class="fragment">
+                    <p>Sample solutions:</p>
+                    <pre><code class="bash">gzip *.txt
+gunzip file.txt.gz</code></pre>
+                </div>
+            </section>
+
+            <!-- Example of a Bash command -->
+            <section>
+                <h2>Example Command</h2>
+                <pre><code class="bash">echo "${/#variable}"  <!-- Ensure this line is correct -->
+                </code></pre>
+                <aside class="notes">
+                    Explain the use of the variable length in Bash.
+                </aside>
+            </section>
+
+            <!-- Add these new slides while keeping existing ones -->
+
+            <!-- Add after Unix Architecture slide -->
+            <section>
+                <h2>Unix Kernel</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">
+                    The kernel is the core of the Unix operating system, responsible for:
+                </p>
+                <ul style="color: #f0f0f0; font-size: 1.2em;">
+                    <li class="fragment">Process Management</li>
+                    <li class="fragment">Memory Management</li>
+                    <li class="fragment">Device Management</li>
+                    <li class="fragment">System Calls</li>
+                </ul>
+                <aside class="notes">
+                    Explain the core responsibilities of the Unix kernel.
+                </aside>
+            </section>
+
+            <!-- Add after Unix Shell slide -->
+            <section>
+                <h2>Shell Types in Unix</h2>
+                <pre><code class="bash"># Common Unix shells
+/bin/sh   - Bourne Shell (sh)
+/bin/bash - Bourne Again Shell (bash)
+/bin/zsh  - Z Shell (zsh)
+/bin/csh  - C Shell (csh)
+/bin/tcsh - Enhanced C Shell (tcsh)</code></pre>
+                <aside class="notes">
+                    Compare different shell types and their features.
+                </aside>
+            </section>
+
+            <!-- Add after File Permissions slide -->
+            <section>
+                <h2>Special Permissions</h2>
+                <pre><code class="bash"># SUID, SGID, and Sticky Bit
+chmod u+s file  # Set SUID
+chmod g+s dir   # Set SGID
+chmod +t dir    # Set Sticky Bit
+
+# Numeric notation
+chmod 4755 file # SUID with rwxr-xr-x
+chmod 2755 dir  # SGID with rwxr-xr-x
+chmod 1777 dir  # Sticky bit with rwxrwxrwx</code></pre>
+                <aside class="notes">
+                    Explain special permissions and their use cases.
+                </aside>
+            </section>
+
+            <!-- Add after Variables section -->
+            <section>
+                <h2>Environment Variables</h2>
+                <pre><code class="bash"># Common environment variables
+echo $PATH    # Executable search path
+echo $HOME    # User's home directory
+echo $USER    # Current username
+echo $SHELL   # Current shell path
+
+# Setting environment variables
+export MY_VAR="value"
+PATH=$PATH:/new/path</code></pre>
+                <aside class="notes">
+                    Explain the importance of environment variables.
+                </aside>
+            </section>
+
+            <!-- Add after Control Flow section -->
+            <section>
+                <h2>Advanced Control Flow</h2>
+                <pre><code class="bash"># Using && and ||
+command1 && command2  # Run command2 if command1 succeeds
+command1 || command2  # Run command2 if command1 fails
+
+# Using select for menus
+select option in "Start" "Stop" "Restart" "Exit"; do
+    case $option in
+        "Start")   start_service ;;
+        "Stop")    stop_service ;;
+        "Restart") restart_service ;;
+        "Exit")    break ;;
+    esac
+done</code></pre>
+                <aside class="notes">
+                    Demonstrate advanced control flow techniques.
+                </aside>
+            </section>
+
+        </div>
+    </div>
+
+    <script src="dist/reveal.js"></script>
+    <script src="plugin/notes/notes.js"></script>
+    <script src="plugin/markdown/markdown.js"></script>
+    <script src="plugin/highlight/highlight.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            plugins: [RevealMarkdown, RevealHighlight, RevealNotes],
+            width: 1200,
+            height: 1000,
+            margin: 0.04,
+            controls: true,
+            progress: true,
+            center: true,
+            transition: 'slide'
+        });
+    </script>
+</body>
+
+</html>
