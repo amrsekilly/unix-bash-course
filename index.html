@@ -478,23 +478,168 @@ srw-rw---- 1 user group 0 Jan 20 15:25 /tmp/mysql.sock
                 </aside>
             </section>
 
-            <!-- Essential Unix Commands -->
-            <section>
-                <h2>Essential Unix Commands</h2>
-                <pre><code class="bash"># File Operations
-ls -la         # List all files with details
-cp -r src dst  # Copy recursively
-mv old new     # Move/rename files
-rm -rf dir     # Remove recursively
 
-# Navigation
-pwd            # Print working directory
-cd -           # Go to previous directory
-pushd /path    # Push directory to stack
-popd           # Pop directory from stack</code></pre>
-                <aside class="notes">
-                    Cover fundamental commands for daily use.
-                </aside>
+
+            <!-- Replace the single Essential Unix Commands slide with these detailed slides -->
+
+            <!-- Essential Unix Commands Overview -->
+            <section>
+                <h2 style="color: #ff5722;">Essential Unix Commands</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Core commands for file operations and navigation:</p>
+                <ul style="color: #f0f0f0; font-size: 1.2em;">
+                    <li class="fragment">File Operations (ls, cp, mv, rm)</li>
+                    <li class="fragment">Navigation Commands (pwd, cd, pushd, popd)</li>
+                    <li class="fragment">File Examination (cat, less, head, tail)</li>
+                </ul>
+            </section>
+
+            <!-- ls Command -->
+            <section>
+                <h2 style="color: #ff5722;">ls Command</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">List directory contents</p>
+                <pre class="fragment"><code class="bash"># Basic usage
+ls              # List files in current directory
+ls -l           # Long format listing
+ls -a           # Show hidden files
+ls -la          # Combine long format and hidden files
+ls -lh          # Human-readable file sizes
+ls -R           # Recursive listing
+ls -lt          # Sort by modification time</code></pre>
+                <div class="fragment">
+                    <p style="color: #f0f0f0; font-size: 1.2em;">Common use cases:</p>
+                    <ul style="color: #f0f0f0; font-size: 1.2em;">
+                        <li>View directory contents</li>
+                        <li>Check file permissions</li>
+                        <li>View file sizes and dates</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- cp Command -->
+            <section>
+                <h2 style="color: #ff5722;">cp Command</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Copy files and directories</p>
+                <pre class="fragment"><code class="bash"># Basic usage
+cp file1 file2          # Copy a file
+cp -r dir1 dir2        # Copy directory recursively
+cp -i file1 file2      # Interactive mode (prompt before overwrite)
+cp -p file1 file2      # Preserve attributes
+cp file{1,2,3} dir/    # Copy multiple files
+cp -v * dir/           # Verbose mode</code></pre>
+                <div class="fragment">
+                    <p style="color: #f0f0f0; font-size: 1.2em;">Common use cases:</p>
+                    <ul style="color: #f0f0f0; font-size: 1.2em;">
+                        <li>Backup files</li>
+                        <li>Duplicate directories</li>
+                        <li>Create file copies for editing</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- mv Command -->
+            <section>
+                <h2 style="color: #ff5722;">mv Command</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Move or rename files and directories</p>
+                <pre class="fragment"><code class="bash"># Basic usage
+mv file1 file2         # Rename a file
+mv file dir/           # Move file to directory
+mv -i file1 file2      # Interactive mode
+mv -v file dir/        # Verbose mode
+mv dir1 dir2           # Move/rename directory
+mv file{1,2,3} dir/    # Move multiple files</code></pre>
+                <div class="fragment">
+                    <p style="color: #f0f0f0; font-size: 1.2em;">Common use cases:</p>
+                    <ul style="color: #f0f0f0; font-size: 1.2em;">
+                        <li>Organize files into directories</li>
+                        <li>Rename files and directories</li>
+                        <li>Move files between locations</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- rm Command -->
+            <section>
+                <h2 style="color: #ff5722;">rm Command</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Remove files and directories</p>
+                <pre class="fragment"><code class="bash"># Basic usage
+rm file              # Remove a file
+rm -r dir            # Remove directory recursively
+rm -f file           # Force removal (no prompt)
+rm -i file           # Interactive mode
+rm -rf dir           # Force remove directory
+rm -v file           # Verbose mode</code></pre>
+                <div class="fragment">
+                    <p style="color: #f0f0f0; font-size: 1.2em;">⚠️ Warning:</p>
+                    <ul style="color: #f0f0f0; font-size: 1.2em;">
+                        <li>Use with caution - deletions are permanent</li>
+                        <li>Be especially careful with rm -rf</li>
+                        <li>Consider using -i flag for safety</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- pwd Command -->
+            <section>
+                <h2 style="color: #ff5722;">pwd Command</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Print working directory</p>
+                <pre class="fragment"><code class="bash"># Basic usage
+pwd                  # Show current directory
+pwd -P               # Show physical path (resolve symlinks)
+pwd -L               # Show logical path (keep symlinks)
+
+# Example output
+/home/user/documents</code></pre>
+                <div class="fragment">
+                    <p style="color: #f0f0f0; font-size: 1.2em;">Common use cases:</p>
+                    <ul style="color: #f0f0f0; font-size: 1.2em;">
+                        <li>Verify current location</li>
+                        <li>Use in scripts for path operations</li>
+                        <li>Debug directory navigation issues</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- cd Command -->
+            <section>
+                <h2 style="color: #ff5722;">cd Command</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Change directory</p>
+                <pre class="fragment"><code class="bash"># Basic usage
+cd dir               # Change to directory
+cd                   # Go to home directory
+cd -                 # Go to previous directory
+cd ..                # Go up one level
+cd ../..             # Go up two levels
+cd ~                 # Go to home directory</code></pre>
+                <div class="fragment">
+                    <p style="color: #f0f0f0; font-size: 1.2em;">Common use cases:</p>
+                    <ul style="color: #f0f0f0; font-size: 1.2em;">
+                        <li>Navigate file system</li>
+                        <li>Switch between directories</li>
+                        <li>Return to previous location</li>
+                    </ul>
+                </div>
+            </section>
+
+            <!-- pushd/popd Commands -->
+            <section>
+                <h2 style="color: #ff5722;">pushd and popd Commands</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Directory stack manipulation</p>
+                <pre class="fragment"><code class="bash"># pushd usage
+pushd /path          # Push directory and change to it
+pushd +n             # Rotate stack n times
+dirs                 # Show directory stack
+
+# popd usage
+popd                 # Pop top directory and return
+popd +n              # Remove nth directory from stack</code></pre>
+                <div class="fragment">
+                    <p style="color: #f0f0f0; font-size: 1.2em;">Common use cases:</p>
+                    <ul style="color: #f0f0f0; font-size: 1.2em;">
+                        <li>Navigate complex directory structures</li>
+                        <li>Return to previous locations</li>
+                        <li>Script directory navigation</li>
+                    </ul>
+                </div>
             </section>
 
             <!-- File Content Commands -->
