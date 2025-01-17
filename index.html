@@ -333,27 +333,148 @@
 └── spool/     # Print queues</code></pre>
             </section>
 
-            <!-- File Types in Unix -->
+            <!-- File Types Overview -->
             <section>
-                <h2>File Types in Unix</h2>
-                <p style="color: #f0f0f0; font-size: 1.2em;">
-                    Unix supports various file types, including regular files, directories, symbolic links, and special
-                    files.
-                </p>
-                <pre><code class="bash"># Regular files
--rw-r--r-- 1 user group file.txt
-
-# Directories
-drwxr-xr-x 2 user group Documents
-
-# Symbolic links
-lrwxrwxrwx 1 user group link -> target
-
-# Special files
-crw-rw-rw- 1 root root /dev/null
-brw-rw---- 1 root disk /dev/sda</code></pre>
+                <h2 style="color: #ff5722;">File Types in Unix</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Unix treats everything as a file and supports various file
+                    types:</p>
+                <ul style="color: #f0f0f0; font-size: 1.2em;">
+                    <li class="fragment">Regular Files (-)</li>
+                    <li class="fragment">Directories (d)</li>
+                    <li class="fragment">Symbolic Links (l)</li>
+                    <li class="fragment">Block Special Files (b)</li>
+                    <li class="fragment">Character Special Files (c)</li>
+                    <li class="fragment">Named Pipes (p)</li>
+                    <li class="fragment">Socket Files (s)</li>
+                </ul>
                 <aside class="notes">
-                    Explain different file types and their characteristics.
+                    Introduce the concept that everything in Unix is treated as a file.
+                </aside>
+            </section>
+
+            <!-- Regular Files -->
+            <section>
+                <h2 style="color: #ff5722;">Regular Files (-)</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Most common file type, containing data in various formats:
+                </p>
+                <ul style="color: #f0f0f0; font-size: 1.2em;">
+                    <li class="fragment">Text files</li>
+                    <li class="fragment">Binary files</li>
+                    <li class="fragment">Shell scripts</li>
+                </ul>
+                <pre class="fragment"><code class="bash"># Example of regular files
+-rw-r--r-- 1 user group 2048 Jan 20 14:30 document.txt
+-rwxr-xr-x 1 user group 8390 Jan 20 14:35 script.sh
+-rw-r--r-- 1 user group 1024 Jan 20 14:40 image.jpg</code></pre>
+                <aside class="notes">
+                    Explain different types of regular files and their permissions.
+                </aside>
+            </section>
+
+            <!-- Directories -->
+            <section>
+                <h2 style="color: #ff5722;">Directories (d)</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Special files that contain other files and directories:</p>
+                <pre class="fragment"><code class="bash"># Directory listing
+drwxr-xr-x 2 user group 4096 Jan 20 14:45 Documents/
+drwxr-xr-x 4 user group 4096 Jan 20 14:50 Projects/
+
+# Common directory operations
+ls -la        # List directory contents
+mkdir dir     # Create directory
+rmdir dir     # Remove empty directory
+rm -r dir     # Remove directory and contents</code></pre>
+                <aside class="notes">
+                    Explain directory permissions and common operations.
+                </aside>
+            </section>
+
+            <!-- Symbolic Links -->
+            <section>
+                <h2 style="color: #ff5722;">Symbolic Links (l)</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Special files that point to other files or directories:</p>
+                <pre class="fragment"><code class="bash"># Symbolic link example
+lrwxrwxrwx 1 user group 15 Jan 20 15:00 link -> target
+
+# Creating symbolic links
+ln -s target link     # Create symbolic link
+ls -l link           # View link details
+readlink link        # Show link target</code></pre>
+                <aside class="notes">
+                    Explain symbolic links and their uses in Unix systems.
+                </aside>
+            </section>
+
+            <!-- Block Special Files -->
+            <section>
+                <h2 style="color: #ff5722;">Block Special Files (b)</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Used for block-oriented devices:</p>
+                <pre class="fragment"><code class="bash"># Block device examples
+brw-rw---- 1 root disk 8, 0 Jan 20 15:10 /dev/sda    # Hard drive
+brw-rw---- 1 root disk 8, 1 Jan 20 15:10 /dev/sda1   # Partition
+
+# Common characteristics:
+- Fixed size blocks
+- Random access
+- Buffered I/O
+- Used for storage devices</code></pre>
+                <aside class="notes">
+                    Explain block devices and their role in the system.
+                </aside>
+            </section>
+
+            <!-- Character Special Files -->
+            <section>
+                <h2 style="color: #ff5722;">Character Special Files (c)</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Used for character-oriented devices:</p>
+                <pre class="fragment"><code class="bash"># Character device examples
+crw-rw-rw- 1 root root 1, 3 Jan 20 15:15 /dev/null   # Null device
+crw-rw---- 1 root tty  4, 0 Jan 20 15:15 /dev/tty0   # Terminal
+
+# Common characteristics:
+- Character stream
+- Sequential access
+- Unbuffered I/O
+- Used for terminals and printers</code></pre>
+                <aside class="notes">
+                    Explain character devices and their common uses.
+                </aside>
+            </section>
+
+            <!-- Named Pipes -->
+            <section>
+                <h2 style="color: #ff5722;">Named Pipes (p)</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Special files for inter-process communication:</p>
+                <pre class="fragment"><code class="bash"># Named pipe example
+prw-r--r-- 1 user group 0 Jan 20 15:20 mypipe
+
+# Creating and using named pipes
+mkfifo mypipe                  # Create named pipe
+ls -l mypipe                   # View pipe details
+echo "Hello" > mypipe &        # Write to pipe
+cat < mypipe                   # Read from pipe</code></pre>
+                <aside class="notes">
+                    Explain named pipes and their role in process communication.
+                </aside>
+            </section>
+
+            <!-- Socket Files -->
+            <section>
+                <h2 style="color: #ff5722;">Socket Files (s)</h2>
+                <p style="color: #f0f0f0; font-size: 1.2em;">Used for network and inter-process communication:</p>
+                <pre class="fragment"><code class="bash"># Socket file example
+srw-rw---- 1 user group 0 Jan 20 15:25 /tmp/mysql.sock
+
+# Common socket locations
+/var/run/*.sock     # System service sockets
+/tmp/*.sock         # Temporary sockets
+
+# Characteristics:
+- Bidirectional communication
+- Used by network services
+- Local IPC mechanism</code></pre>
+                <aside class="notes">
+                    Explain socket files and their role in network communications.
                 </aside>
             </section>
 
